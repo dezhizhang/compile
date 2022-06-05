@@ -3,7 +3,8 @@ let tokenize = require('./tokenize')
 
 function parse(script) {
     let token = tokenize(script);
-    return token;
+    let ast = toAST(token);
+    return ast;
 
 }
 
