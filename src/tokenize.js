@@ -23,7 +23,37 @@ function tokenize(script) {
     for(let token of tokenizer(script)) {
         tokens.push(token);
     }
-    return tokens;
+    return new TokenReader(tokens);
+}
+
+// function TokenReader(tokens) {
+//     this.tokens = tokens;
+//     this.pos = 0;
+// }
+
+class TokenReader{
+    constructor(tokens) {
+        this.tokens = tokens;
+        this.pos = 0;
+    }
+
+    read() {
+        if(this.pos < this.tokens.length) {
+            return this.tokens[this.pos++];
+        }
+        return null;
+    }
+    peek() {
+        if(this.pos < this.tokens.length) {
+            return this.tokens[this.pos];
+        }
+    }
+
+    unread() {
+        if(this.pos > 0) {
+            this.pos--;
+        }
+    }
 }
 
 module.exports = tokenize;
